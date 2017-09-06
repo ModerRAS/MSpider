@@ -3,4 +3,5 @@
 
 class InsideCode:
     def __init__(self):
+        # 定义一个dict用来作为多分支的选择的
         self.runner_dict = {}
