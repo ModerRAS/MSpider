@@ -20,4 +20,4 @@ class MessageQueue(Process):
             message = json.loads(self.socket.recv_json())
             id, value = self.InsideCode(message)
 
-    def mode_
+    def mode_append_queue(self,mode:int,):
