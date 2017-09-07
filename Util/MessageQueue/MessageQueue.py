@@ -17,5 +17,5 @@ class MessageQueue(Process):
     def run(self):
         while True:
             message = json.loads(self.socket.recv_json())
-            self.InsideCode(message)
+            id, value = self.InsideCode(message)
             
