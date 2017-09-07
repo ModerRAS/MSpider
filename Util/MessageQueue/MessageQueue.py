@@ -18,4 +18,3 @@ class MessageQueue(Process):
         while True:
             message = json.loads(self.socket.recv_json())
             id, value = self.InsideCode(message)
-            
