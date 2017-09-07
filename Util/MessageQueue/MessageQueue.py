@@ -16,7 +16,7 @@ class MessageQueue(Process):
         self.socket.bind("tcp://0.0.0.0:" + str(ServerPort))
         self.queue = {}
         self.InsideCode = InsideCode
-        self.mode = {1:self.mode_append_queue}
+        self.mode = {1:self.mode_put_queue}
 
     def run(self):
         while True:
@@ -24,16 +24,23 @@ class MessageQueue(Process):
             index, value = self.InsideCode(message)
             self.mode[index](value)
 
-    def mode_append_queue(self,mode:int,li:list):
+    def __get_queue_length(self, mode:int):
         try:
             self.queue[mode]
         except KeyError as e:
             self.queue[mode] = []
-        length = len(self.queue[mode])
+        return len(self.queue[mode])
+
+    def mode_put_queue(self, mode:int, li:list):
+        length = self.__get_queue_length(mode)
         if length >= MaxQueueLength:
-            return -1
+            self.socket.send_json("-1")
         else:
             list(map(lambda x:self.queue[mode].append(x),li))
-            return 0
+            self.socket.send_json("0")
+
+    def mode_get_queue(self,mode:int):
+        length = self.__get_queue_length(mode)
+        
 
 
