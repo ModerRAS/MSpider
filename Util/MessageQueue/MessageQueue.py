@@ -34,7 +34,7 @@ class MessageQueue(Process):
     def mode_put_queue(self, mode:int, li:list):
         length = self.__get_queue_length(mode)
         if length >= MaxQueueLength:
-            self.socket.send_json([1,])
+            self.socket.send_json([-1,])
         else:
             list(map(lambda x:self.queue[mode].append(x),li))
             self.socket.send_json([0,])
@@ -44,5 +44,4 @@ class MessageQueue(Process):
         try:
             self.socket.send_json(json.dumps([0,self.queue[mode].pop(0)]))
         except IndexError as e:
-            self.socket.send_json(json.dumps([1,]))
-    
+            self.socket.send_json(json.dumps([-1,]))
