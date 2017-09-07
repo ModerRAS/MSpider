@@ -4,6 +4,8 @@ from queue import Queue
 import zmq
 from multiprocessing import Process
 
+from Config import MaxQueueLength
+
 
 class MessageQueue(Process):
     def __init__(self, InsideCode, ServerPort: int = 5555, name: str = "MessageQueue"):
@@ -25,5 +27,10 @@ class MessageQueue(Process):
         try:
             self.queue[mode]
         except KeyError as e:
-            self.queue[mode] = Queue()
-            
+            self.queue[mode] = []
+        length = len(self.queue[mode])
+        if length >= MaxQueueLength:
+            return False
+        else:
+            list(map(lambda x:self.queue[mode].append(x),li))
+        
