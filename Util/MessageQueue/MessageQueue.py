@@ -1,4 +1,5 @@
 import json
+from queue import Queue
 
 import zmq
 from multiprocessing import Process
@@ -23,3 +24,6 @@ class MessageQueue(Process):
     def mode_append_queue(self,mode:int,li:list):
         try:
             self.queue[mode]
+        except KeyError as e:
+            self.queue[mode] = Queue()
+            
