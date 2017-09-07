@@ -13,8 +13,11 @@ class MessageQueue(Process):
         self.socket.bind("tcp://0.0.0.0:" + str(ServerPort))
         self.queue = {}
         self.InsideCode = InsideCode
+        self.mode = {}
 
     def run(self):
         while True:
             message = json.loads(self.socket.recv_json())
             id, value = self.InsideCode(message)
+
+    def mode_
