@@ -45,5 +45,3 @@ class MessageQueue(Process):
             self.socket.send_json(json.dumps([0,self.queue[mode].pop(0)]))
         except IndexError as e:
             self.socket.send_json(json.dumps([-1,]))
-
-
