@@ -17,5 +17,5 @@ class ControlCenter(Process):
 
     def run(self):
         recv = json.loads(self.socket.recv_json())
-
+        a = 0
 
