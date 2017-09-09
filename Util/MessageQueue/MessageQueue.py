@@ -1,8 +1,7 @@
 import json
-from queue import Queue
+from multiprocessing import Process
 
 import zmq
-from multiprocessing import Process
 
 from Config import MaxQueueLength
 
