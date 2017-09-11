@@ -2,3 +2,4 @@ pika
 selenium
 requests
 beautifulsoup4
+pyzmq
