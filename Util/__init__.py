@@ -1,1 +1,1 @@
-from .MailBox.MailBox import MailBox
+from .MailBox import MailBox
